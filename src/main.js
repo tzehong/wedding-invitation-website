@@ -1,5 +1,6 @@
 import './style.css';
 import { wedding, isValidRsvpUrl } from './wedding.js';
+import curtainArtwork from './assets/dragon-phoenix.png';
 
 const curtain = document.querySelector('.curtain-reveal');
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -8,7 +9,15 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const dismissCurtain = () => curtain.remove();
   curtain.querySelector('.curtain-left').addEventListener('animationend', dismissCurtain, { once: true });
   // Keep the invitation accessible if the browser interrupts the animation.
-  window.setTimeout(dismissCurtain, 5000);
+  const artwork = new Image();
+  artwork.src = curtainArtwork;
+  const startReveal = () => {
+    curtain.classList.add('curtain-ready');
+    window.setTimeout(dismissCurtain, 5000);
+  };
+  // Let the embroidery load before the opening starts.
+  artwork.decode().then(startReveal, startReveal);
+  window.setTimeout(dismissCurtain, 10000);
 }
 
 const text = (id, value) => { document.getElementById(id).textContent = value; };
