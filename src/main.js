@@ -1,6 +1,16 @@
 import './style.css';
 import { wedding, isValidRsvpUrl } from './wedding.js';
 
+const curtain = document.querySelector('.curtain-reveal');
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  curtain.remove();
+} else {
+  const dismissCurtain = () => curtain.remove();
+  curtain.querySelector('.curtain-left').addEventListener('animationend', dismissCurtain, { once: true });
+  // Keep the invitation accessible if the browser interrupts the animation.
+  window.setTimeout(dismissCurtain, 5000);
+}
+
 const text = (id, value) => { document.getElementById(id).textContent = value; };
 text('partner-one', wedding.partnerOne);
 text('partner-two', wedding.partnerTwo);
