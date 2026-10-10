@@ -3,8 +3,6 @@
   --deep-red: #781923;
   --ivory: #fffaf5;
   --ink: #542b2d;
-  --curtain-duration: 3.8s;
-  --curtain-delay: .4s;
   font-family: Arial, sans-serif;
   color: var(--ink);
   background: var(--ivory);
@@ -55,24 +53,48 @@ h1 i { display: block; font-size: 44px; line-height: 1.5; font-weight: 400; colo
 .rsvp .button { background: var(--ivory); color: var(--red); border-color: var(--ivory); }
 .rsvp .button:hover { background: #f9e2de; }
 footer { text-align: center; padding: 40px 24px; color: var(--red); }
+.wedding-music { text-align: center; padding: 65px 24px 30px; }
+.wedding-music h2 { font: 400 clamp(28px, 4vw, 38px) Georgia, serif; color: var(--red); margin: 18px 0; }
+.wedding-music > p:not(.eyebrow) { font-size: 14px; }
+.music-player { max-width: 560px; aspect-ratio: 16 / 9; margin: 28px auto 18px; border: 1px solid #dbb9b4; border-radius: 4px; overflow: hidden; background: #781923; }
+.music-player iframe { width: 100%; height: 100%; border: 0; display: block; }
+.music-fallback { color: var(--red); font-size: 13px; text-underline-offset: 4px; }
 footer p:first-child { font: 28px Georgia, serif; }
 footer p:last-child { font-size: 12px; letter-spacing: 2px; }
 a:focus-visible { outline: 3px solid #c68c51; outline-offset: 6px; }
-.curtain-reveal { position: fixed; inset: 0; z-index: 100; overflow: hidden; pointer-events: none; animation: curtain-dismiss .01s linear calc(var(--curtain-duration) + var(--curtain-delay)) forwards; }
-.curtain-panel { position: absolute; top: 0; bottom: 0; width: 50.5%; background: repeating-linear-gradient(90deg, #64131d 0%, #a7212a 5%, #c84348 9%, #961d29 13%, #64131d 18%); box-shadow: 0 0 35px #4b091c80; will-change: transform; }
-.curtain-panel::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #440d1855, transparent 25%, #440d1833); border-bottom: 5px solid #efd6b5; }
-.curtain-left { left: 0; border-right: 2px solid #efd6b5; animation: curtain-open-left var(--curtain-duration) cubic-bezier(.45, 0, .2, 1) var(--curtain-delay) forwards; }
-.curtain-right { right: 0; border-left: 2px solid #efd6b5; animation: curtain-open-right var(--curtain-duration) cubic-bezier(.45, 0, .2, 1) var(--curtain-delay) forwards; }
-.curtain-panel::before { content: ''; position: absolute; inset: 18px; border: 1px solid #efd6b566; outline: 1px solid #efd6b533; outline-offset: -6px; }
-.curtain-art { position: absolute; inset: 15% auto 10% 50%; width: min(90%, 54vh); transform: translateX(-50%); z-index: 1; background-image: url('./assets/dragon-phoenix.png'); background-size: 200% auto; background-repeat: no-repeat; filter: drop-shadow(0 2px 8px #540e2455); }
-.curtain-left .curtain-art { background-position: left center; }
-.curtain-right .curtain-art { background-position: right center; }
-.curtain-blessing { position: absolute; top: 8%; left: 0; right: 0; z-index: 1; text-align: center; color: #f7dfb5; font-family: 'Noto Serif CJK SC', 'Songti SC', SimSun, serif; font-size: clamp(15px, 2vw, 24px); letter-spacing: .3em; }
-.curtain-reveal, .curtain-panel { animation-play-state: paused; }
-.curtain-ready, .curtain-ready .curtain-panel { animation-play-state: running; }
-@keyframes curtain-open-left { to { transform: translateX(-105%); } }
-@keyframes curtain-open-right { to { transform: translateX(105%); } }
-@keyframes curtain-dismiss { to { visibility: hidden; } }
+.envelope-intro { border: 0; padding: 24px; margin: 0; width: 100%; max-width: none; height: 100dvh; max-height: none; color: var(--ink); background: radial-gradient(ellipse at center, #fffaf5, #f7e4df); overflow-y: auto; }
+.envelope-intro[open] { display: grid; place-items: center; }
+.envelope-intro::backdrop { background: var(--ivory); }
+.intro-content { width: min(100%, 620px); text-align: center; }
+.intro-content h2 { font: 400 clamp(26px, 4vw, 38px) Georgia, serif; color: var(--red); margin: 18px 0; }
+#intro-instruction { font-size: 14px; min-height: 24px; }
+.envelope-stage { height: 390px; position: relative; perspective: 1200px; }
+.red-envelope { position: absolute; bottom: 30px; left: 50%; width: min(420px, 100%); aspect-ratio: 1.5; transform: translateX(-50%); }
+.envelope-back { position: absolute; inset: 0; border-radius: 8px; background: #7d1922; box-shadow: 0 20px 45px #78192335; }
+.invitation-card { position: absolute; z-index: 2; inset: 10px 16px; padding: 14px 20px; border: 1px solid #cbab73; border-radius: 4px; background: var(--ivory); color: var(--red); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; font: inherit; opacity: 0; transform: translateY(0); transition: transform .9s cubic-bezier(.22, 1, .36, 1) .55s, opacity .3s .5s; box-shadow: 0 8px 25px #4a091b20; }
+.invitation-card::before { content: ''; position: absolute; inset: 7px; border: 1px solid #d8bebc; pointer-events: none; }
+.card-symbol { font-family: 'Noto Serif CJK SC', 'Songti SC', SimSun, serif; font-size: 32px; line-height: 1; }
+.card-caption { font-size: 9px; text-transform: uppercase; letter-spacing: 2px; }
+.card-names { max-width: 300px; font: 22px Georgia, serif; }
+.card-date { font-size: 11px; }
+.card-action { font-size: 12px; text-decoration: underline; text-underline-offset: 4px; }
+.envelope-pocket { position: absolute; z-index: 3; inset: 0; border-radius: 6px; clip-path: polygon(0 25%, 50% 58%, 100% 25%, 100% 100%, 0 100%); background: linear-gradient(125deg, #b62b34, #861924); pointer-events: none; }
+.envelope-pocket::before { content: ''; position: absolute; inset: 28% 7% 3%; background: url('./assets/dragon-phoenix.png') center / contain no-repeat; opacity: .65; }
+.envelope-pocket span { position: absolute; bottom: 14px; left: 0; right: 0; font-family: 'Noto Serif CJK SC', 'Songti SC', SimSun, serif; color: #ffe5ae; font-size: 14px; letter-spacing: 5px; }
+.envelope-flap { position: absolute; z-index: 4; inset: 0; background: linear-gradient(150deg, #c6373f, #a7212a); clip-path: polygon(0 0, 100% 0, 50% 59%); transform-origin: top; backface-visibility: hidden; transition: transform .9s ease, z-index 0s .45s; pointer-events: none; }
+.envelope-seal { position: absolute; z-index: 5; top: 45%; left: 50%; transform: translate(-50%, -50%); width: 62px; height: 62px; border-radius: 50%; border: 1px solid #fff0cb; background: #e7c282; color: #881e28; box-shadow: 0 3px 12px #63101c40; font: 36px 'Noto Serif CJK SC', 'Songti SC', SimSun, serif; cursor: pointer; transition: opacity .25s, transform .35s; }
+.envelope-seal:hover { transform: translate(-50%, -50%) scale(1.08); }
+.is-open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+.is-open .envelope-seal { opacity: 0; pointer-events: none; }
+.is-open .invitation-card { opacity: 1; transform: translateY(-48%); }
+.invitation-card:not(:disabled) { cursor: pointer; }
+.invitation-card:not(:disabled):hover .card-action { color: #5c111c; }
+.skip-intro { padding: 10px; background: transparent; border: 0; color: var(--red); font: 12px Arial, sans-serif; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+button:focus-visible { outline: 3px solid #c68c51; outline-offset: 5px; }
+.is-revealing .intro-content { animation: invitation-enter .7s ease forwards; }
+@keyframes invitation-enter { to { opacity: 0; transform: scale(1.12); } }
+@media (max-width: 600px) { .envelope-stage { height: 350px; } .invitation-card { padding: 10px 14px; gap: 6px; } .card-names { font-size: 20px; } .card-symbol { font-size: 26px; } }
+@media (max-height: 600px) { .envelope-stage { height: 310px; } }
 @media (max-width: 600px) {
   header { padding: 20px 24px; }
   .hero { padding-top: 40px; }
@@ -85,6 +107,6 @@ a:focus-visible { outline: 3px solid #c68c51; outline-offset: 6px; }
 }
 @media (prefers-reduced-motion: reduce) {
   :root { scroll-behavior: auto; }
-  .curtain-reveal { display: none; }
-  .curtain-panel { animation: none; }
+  .envelope-flap, .envelope-seal, .invitation-card { transition: none; }
+  .is-revealing .intro-content { animation: none; }
 }

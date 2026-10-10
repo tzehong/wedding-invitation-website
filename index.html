@@ -8,16 +8,29 @@
   <title>Yong Tze Hong & Nguyen Minh Thu · Wedding open house</title>
 </head>
 <body>
-  <div class="curtain-reveal" aria-hidden="true">
-    <div class="curtain-panel curtain-left">
-      <p class="curtain-blessing" lang="zh">龙凤呈祥</p>
-      <div class="curtain-art"></div>
+  <dialog class="envelope-intro" aria-labelledby="intro-title" aria-describedby="intro-instruction">
+    <div class="intro-content">
+      <p class="chinese-blessing" lang="zh">龙凤呈祥 · 百年好合</p>
+      <h2 id="intro-title">An invitation, sealed with love.</h2>
+      <p id="intro-instruction" aria-live="polite">Tap the seal to open your red envelope.</p>
+      <div class="envelope-stage">
+        <div class="red-envelope">
+          <div class="envelope-back" aria-hidden="true"></div>
+          <button class="invitation-card" type="button" disabled>
+            <span class="card-symbol" lang="zh" aria-hidden="true">囍</span>
+            <span class="card-caption">Wedding invitation</span>
+            <span class="card-names"></span>
+            <span class="card-date"></span>
+            <span class="card-action">Open invitation →</span>
+          </button>
+          <div class="envelope-pocket" aria-hidden="true"><span lang="zh">良缘永结</span></div>
+          <div class="envelope-flap" aria-hidden="true"></div>
+          <button class="envelope-seal" type="button" aria-label="Open red envelope"><span lang="zh" aria-hidden="true">囍</span></button>
+        </div>
+      </div>
+      <button class="skip-intro" type="button">Go straight to the invitation</button>
     </div>
-    <div class="curtain-panel curtain-right">
-      <p class="curtain-blessing" lang="zh">百年好合</p>
-      <div class="curtain-art"></div>
-    </div>
-  </div>
+  </dialog>
   <header><a href="#home" class="monogram" aria-label="Back to invitation">TH & MT</a><nav aria-label="Main navigation"><a href="#details">The day</a><a href="#rsvp">RSVP</a></nav></header>
   <main>
     <section id="home" class="hero">
@@ -36,6 +49,15 @@
       <div class="cards"><article><p class="eyebrow">01 · When & where</p><h3 id="ceremony-time"></h3><p id="venue"></p><p id="address"></p></article><article><p class="eyebrow">02 · Our open house</p><h3 id="reception-time"></h3><p>Join us at home to celebrate our wedding with family and friends.</p><p id="dress-code"></p></article></div>
     </section>
     <section id="rsvp" class="rsvp"><p class="eyebrow">Save your seat</p><h2>Will you join us?</h2><p id="rsvp-deadline"></p><p id="rsvp-message"></p><a id="rsvp-link" class="button" hidden>Send your RSVP <span aria-hidden="true">↗</span></a></section>
+    <section class="wedding-music" aria-labelledby="music-title">
+      <p class="eyebrow">The soundtrack to our celebration</p>
+      <h2 id="music-title">A song to share with you.</h2>
+      <p>Press play to listen while you explore our invitation.</p>
+      <div class="music-player">
+        <iframe src="https://www.youtube-nocookie.com/embed/bLZWjczFjKo" title="Our wedding song on YouTube" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <a class="music-fallback" href="https://youtu.be/bLZWjczFjKo" target="_blank" rel="noopener noreferrer">Listen on YouTube ↗</a>
+    </section>
   </main>
   <footer><p id="footer-names"></p><p>With love, always.</p></footer>
   <script type="module" src="/src/main.js"></script>

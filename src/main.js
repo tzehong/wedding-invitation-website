@@ -1,24 +1,52 @@
 import './style.css';
 import { wedding, isValidRsvpUrl } from './wedding.js';
-import curtainArtwork from './assets/dragon-phoenix.png';
-
-const curtain = document.querySelector('.curtain-reveal');
-if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  curtain.remove();
-} else {
-  const dismissCurtain = () => curtain.remove();
-  curtain.querySelector('.curtain-left').addEventListener('animationend', dismissCurtain, { once: true });
-  // Keep the invitation accessible if the browser interrupts the animation.
-  const artwork = new Image();
-  artwork.src = curtainArtwork;
-  const startReveal = () => {
-    curtain.classList.add('curtain-ready');
-    window.setTimeout(dismissCurtain, 5000);
-  };
-  // Let the embroidery load before the opening starts.
-  artwork.decode().then(startReveal, startReveal);
-  window.setTimeout(dismissCurtain, 10000);
-}
+const intro = document.querySelector('.envelope-intro');
+const seal = intro.querySelector('.envelope-seal');
+const card = intro.querySelector('.invitation-card');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+intro.querySelector('.card-names').textContent = `${wedding.partnerOne} & ${wedding.partnerTwo}`;
+intro.querySelector('.card-date').textContent = wedding.dateLabel;
+let revealed = false;
+let opened = false;
+const previousOverflow = document.body.style.overflow;
+const finishReveal = () => {
+  intro.close();
+  intro.remove();
+  document.body.style.overflow = previousOverflow;
+  const heading = document.querySelector('h1');
+  heading.setAttribute('tabindex', '-1');
+  heading.focus({ preventScroll: true });
+};
+const revealWebsite = (animate = false) => {
+  if (revealed) return;
+  revealed = true;
+  if (animate && !reducedMotion.matches) {
+    intro.classList.add('is-revealing');
+    window.setTimeout(finishReveal, 700);
+  } else {
+    finishReveal();
+  }
+};
+seal.addEventListener('click', () => {
+  if (opened) return;
+  opened = true;
+  seal.disabled = true;
+  intro.classList.add('is-open');
+  intro.querySelector('#intro-instruction').textContent = 'Your invitation is inside. Tap the card to join us.';
+  window.setTimeout(() => {
+    if (revealed) return;
+    card.disabled = false;
+    card.focus({ preventScroll: true });
+  }, reducedMotion.matches ? 0 : 1450);
+});
+card.addEventListener('click', () => revealWebsite(true));
+intro.querySelector('.skip-intro').addEventListener('click', () => revealWebsite());
+intro.addEventListener('cancel', (event) => {
+  event.preventDefault();
+  revealWebsite();
+});
+intro.showModal();
+document.body.style.overflow = 'hidden';
 
 const text = (id, value) => { document.getElementById(id).textContent = value; };
 text('partner-one', wedding.partnerOne);
