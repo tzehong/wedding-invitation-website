@@ -1,15 +1,15 @@
-// Replace these sample details before sharing the invitation.
+// Wedding invitation details.
 export const wedding = {
-  partnerOne: 'Alex',
-  partnerTwo: 'Jamie',
-  dateLabel: 'Saturday, 12 December 2026',
-  location: 'Kuala Lumpur, Malaysia',
-  ceremonyTime: '4:00 in the afternoon',
-  receptionTime: '6:00 in the evening',
-  venue: 'Your wedding venue',
-  address: 'Your venue address, Kuala Lumpur',
-  dressCode: 'Dress code: garden formal',
-  rsvpDeadline: 'Kindly reply by 12 November 2026.',
+  partnerOne: 'Yong Tze Hong',
+  partnerTwo: 'Nguyen Minh Thu',
+  dateLabel: 'Sunday, 29 November 2026 · 6:00 PM',
+  location: 'Broga, Lenggeng, Negeri Sembilan',
+  ceremonyTime: '6:00 PM',
+  receptionTime: 'At our home',
+  venue: 'Wedding open house',
+  address: '206 KG Baru Broga, 71750 Lenggeng, Negeri Sembilan',
+  dressCode: '',
+  rsvpDeadline: '',
   // Add an HTTPS form URL or mailto: address to enable the RSVP button.
   rsvpUrl: '',
 };

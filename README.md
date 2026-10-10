@@ -1,6 +1,6 @@
 # Wedding invitation website
 
-A responsive wedding invitation built with vanilla JavaScript and Vite. All details are sample placeholders.
+A responsive wedding invitation built with vanilla JavaScript and Vite. Personalized for Yong Tze Hong and Nguyen Minh Thu’s wedding open house on 29 November 2026.
 
 ## Develop
 
@@ -13,7 +13,7 @@ npm run dev
 
 ## Personalize
 
-Edit `src/wedding.js` for names, date, venue, dress code, and RSVP deadline. Set `rsvpUrl` to your HTTPS RSVP form or a `mailto:` address. Until configured, the site shows an RSVP availability message and hides the submission link. This site does not collect or store responses itself.
+Edit `src/wedding.js` for invitation details. Optional dress code and RSVP deadline fields can be left empty. Set `rsvpUrl` to your HTTPS RSVP form or a `mailto:` address. Until configured, the site shows an RSVP availability message and hides the submission link. This site does not collect or store responses itself.
 
 ## Validate and build
 

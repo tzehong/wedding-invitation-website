@@ -12,9 +12,11 @@ text('venue', wedding.venue);
 text('address', wedding.address);
 text('dress-code', wedding.dressCode);
 text('rsvp-deadline', wedding.rsvpDeadline);
+document.getElementById('rsvp-deadline').hidden = !wedding.rsvpDeadline;
+document.getElementById('dress-code').hidden = !wedding.dressCode;
 text('footer-names', `${wedding.partnerOne} & ${wedding.partnerTwo}`);
-document.title = `${wedding.partnerOne} & ${wedding.partnerTwo} · Our wedding`;
-document.querySelector('.monogram').textContent = `${wedding.partnerOne.charAt(0)} & ${wedding.partnerTwo.charAt(0)}`;
+document.title = `${wedding.partnerOne} & ${wedding.partnerTwo} · Wedding open house`;
+document.querySelector('.monogram').textContent = 'TH & MT';
 if (isValidRsvpUrl(wedding.rsvpUrl)) {
   const link = document.getElementById('rsvp-link');
   link.href = wedding.rsvpUrl;
