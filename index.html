@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f5f1e8" />
+  <meta name="description" content="Join us to celebrate our wedding. Find the details and RSVP." />
+  <title>Our wedding</title>
+</head>
+<body>
+  <header><a href="#home" class="monogram" aria-label="Back to invitation">A & J</a><nav aria-label="Main navigation"><a href="#details">The day</a><a href="#rsvp">RSVP</a></nav></header>
+  <main>
+    <section id="home" class="hero">
+      <p class="eyebrow">Together with our families</p>
+      <h1><span id="partner-one"></span><i>&</i><span id="partner-two"></span></h1>
+      <p class="invitation">invite you to celebrate their wedding</p>
+      <div class="rule"></div>
+      <p id="wedding-date" class="date"></p><p id="wedding-location"></p>
+      <a class="button" href="#rsvp">Join the celebration <span aria-hidden="true">↗</span></a>
+      <p class="small">A little love. A lifetime together.</p>
+    </section>
+    <section id="details" class="details">
+      <p class="eyebrow">A day to remember</p><h2>We can’t wait to see you.</h2>
+      <div class="cards"><article><p class="eyebrow">01 · The ceremony</p><h3 id="ceremony-time"></h3><p id="venue"></p><p id="address"></p></article><article><p class="eyebrow">02 · The celebration</p><h3 id="reception-time"></h3><p>Dinner, dancing & a toast to love.</p><p id="dress-code"></p></article></div>
+      <p class="note">These are sample details. The couple will update this invitation before sharing it.</p>
+    </section>
+    <section id="rsvp" class="rsvp"><p class="eyebrow">Save your seat</p><h2>Will you join us?</h2><p id="rsvp-deadline"></p><p id="rsvp-message"></p><a id="rsvp-link" class="button" hidden>Send your RSVP <span aria-hidden="true">↗</span></a></section>
+  </main>
+  <footer><p id="footer-names"></p><p>With love, always.</p></footer>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
