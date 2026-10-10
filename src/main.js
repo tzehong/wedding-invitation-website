@@ -1,5 +1,46 @@
 import './style.css';
 import { wedding, isValidRsvpUrl } from './wedding.js';
+const musicToggle = document.querySelector('.music-toggle');
+let musicFrame;
+let musicEnabled = false;
+const playerOrigin = 'https://www.youtube-nocookie.com';
+const commandMusic = (func) => {
+  musicFrame?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args: [] }), playerOrigin);
+};
+const setMusic = (enabled) => {
+  musicEnabled = enabled;
+  if (!musicFrame && enabled) {
+    musicFrame = document.createElement('iframe');
+    const params = new URLSearchParams({ autoplay: '1', loop: '1', playlist: 'bLZWjczFjKo', enablejsapi: '1', playsinline: '1', origin: window.location.origin });
+    musicFrame.src = `${playerOrigin}/embed/bLZWjczFjKo?${params}`;
+    musicFrame.title = 'Wedding background music';
+    musicFrame.allow = 'autoplay; encrypted-media';
+    musicFrame.tabIndex = -1;
+    musicFrame.referrerPolicy = 'strict-origin-when-cross-origin';
+    musicFrame.addEventListener('load', () => {
+      musicFrame.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 'wedding-music' }), playerOrigin);
+      for (const eventName of ['onReady', 'onError', 'onAutoplayBlocked']) {
+        musicFrame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'addEventListener', args: [eventName] }), playerOrigin);
+      }
+      commandMusic(musicEnabled ? 'playVideo' : 'pauseVideo');
+    });
+    document.querySelector('#background-music').append(musicFrame);
+  } else {
+    commandMusic(enabled ? 'playVideo' : 'pauseVideo');
+  }
+  musicToggle.textContent = enabled ? '♫ Music on' : '♫ Music off';
+  musicToggle.setAttribute('aria-label', enabled ? 'Pause wedding music' : 'Play wedding music');
+  musicToggle.setAttribute('aria-pressed', String(enabled));
+};
+window.addEventListener('message', (event) => {
+  if (event.origin !== playerOrigin || event.source !== musicFrame?.contentWindow) return;
+  let message;
+  try { message = typeof event.data === 'string' ? JSON.parse(event.data) : event.data; } catch { return; }
+  if (message?.event === 'onReady' || message?.event === 'initialDelivery') commandMusic(musicEnabled ? 'playVideo' : 'pauseVideo');
+  if (message?.event === 'onAutoplayBlocked' || message?.event === 'onError') setMusic(false);
+});
+musicToggle.addEventListener('click', () => setMusic(!musicEnabled));
+
 const intro = document.querySelector('.envelope-intro');
 const seal = intro.querySelector('.envelope-seal');
 const card = intro.querySelector('.invitation-card');
@@ -20,6 +61,7 @@ const finishReveal = () => {
 const revealWebsite = (animate = false) => {
   if (revealed) return;
   revealed = true;
+  if (!opened) setMusic(true);
   if (animate && !reducedMotion.matches) {
     intro.classList.add('is-revealing');
     window.setTimeout(finishReveal, 700);
@@ -30,6 +72,7 @@ const revealWebsite = (animate = false) => {
 seal.addEventListener('click', () => {
   if (opened) return;
   opened = true;
+  setMusic(true);
   seal.disabled = true;
   intro.classList.add('is-open');
   intro.querySelector('#intro-instruction').textContent = 'Your invitation is inside. Tap the card to join us.';
